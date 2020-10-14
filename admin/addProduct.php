@@ -1,8 +1,42 @@
 <?php include "header.php"; ?>
 <?php include "sidebar.php"; ?>
+<?php include "config.php"; 
+      $errors = array();  ?>
 
-		
-		<div id="main-content"> <!-- Main Content Section with everything -->
+        <?php
+            if (isset($_POST['submit'])) {
+                $name = $_POST['name'];
+                $price = $_POST['price'];
+                $image = $_POST['image'];
+                $category = $_POST['category'];
+                $description = $_POST['description'];
+
+                $sql = "SELECT * FROM products WHERE `name`='".$name."'";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $errors[] = array('msg'=>'product name already exists');
+                    }
+                }
+
+                if (sizeof($errors) == 0) {
+
+                    $sql2 = 'INSERT INTO products(`category_id`, `name`,`image`,`price`,`short_desc`) 
+                    VALUES("'.$category.'","'.$name.'","'.$image.'","'.$price.'","'.$description.'")';
+
+                    if ($conn->query($sql2) === true) {
+                        echo "<script> alert('Added successfully'); </script>";
+
+                    } else {
+                        $errors[] = array('msg'=>$conn->error);
+                        echo "Error: " . $sql2 . "<br>" . $conn->error;
+                    }
+                }
+            }
+        ?>
+
+        <div id="main-content"> <!-- Main Content Section with everything -->
 			
 			<noscript> <!-- Show a notification if the user has disabled javascript -->
 				<div class="notification error png_bg">
@@ -22,11 +56,11 @@
 				
 				<div class="content-box-header">
 					
-					<h3>Content box</h3>
+					<h3>Add Product</h3>
 					
 					<ul class="content-box-tabs">
-						<li><a href="#tab1" class="default-tab">Manage</a></li> <!-- href must be unique and match the id of target div -->
-						<li><a href="#tab2">Add</a></li>
+						<!--<li><a href="#tab1" >Manage</a></li>--> <!-- href must be unique and match the id of target div -->
+						<li><a href="#tab2" class="default-tab">Add</a></li>
 					</ul>
 					
 					<div class="clear"></div>
@@ -35,7 +69,7 @@
 				
 				<div class="content-box-content">
 					
-					<div class="tab-content default-tab" id="tab1"><!-- This is the target div. id must match the href of this div's tab -->
+					<!--<div class="tab-content " id="tab1">--><!-- This is the target div. id must match the href of this div's tab -->
 						
 						<!--<div class="notification attention png_bg">
 							<a href="#" class="close"><img src="resources/images/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
@@ -44,7 +78,7 @@
 							</div>
 						</div>-->
 						
-						<table>
+						<!--<table>
 							
 							<thead>
 								<tr>
@@ -78,7 +112,7 @@
 											<a href="#" class="number" title="4">4</a>
 											<a href="#" title="Next Page">Next &raquo;</a><a href="#" title="Last Page">Last &raquo;</a>
 										</div>--> <!-- End .pagination -->
-									    <div class="clear"></div>
+									    <!--<div class="clear"></div>
 									</td>
 								</tr>
 							</tfoot>
@@ -92,7 +126,7 @@
 									<td>Donec tortor diam</td>
 									<td>-->
 										<!-- Icons -->
-									     <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
+									     <!--<a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
 										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
 										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
 									</td>
@@ -106,7 +140,7 @@
 									<td>Donec tortor diam</td>
 									<td>-->
 										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
+										 <!--<a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
 										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
 										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
 									</td>
@@ -120,7 +154,7 @@
 									<td>Donec tortor diam</td>
 									<td>-->
 										<!-- Icons -->
-									     <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
+									     <!--<a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
 										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
 										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
 									</td>
@@ -134,7 +168,7 @@
 									<td>Donec tortor diam</td>
 									<td>-->
 										<!-- Icons -->
-									     <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
+									     <!--<a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
 										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
 										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
 									</td>
@@ -148,7 +182,7 @@
 									<td>Donec tortor diam</td>
 									<td>-->
 										<!-- Icons -->
-									     <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
+									     <!--<a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
 										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
 										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
 									</td>
@@ -162,7 +196,7 @@
 									<td>Donec tortor diam</td>
 									<td>-->
 										<!-- Icons -->
-									     <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
+									     <!--<a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
 										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
 										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
 									</td>
@@ -176,7 +210,7 @@
 									<td>Donec tortor diam</td>
 									<td>-->
 										<!-- Icons -->
-									     <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
+									     <!--<a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
 										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
 										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
 									</td>
@@ -190,7 +224,7 @@
 									<td>Donec tortor diam</td>
 									<td>-->
 										<!-- Icons -->
-									     <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
+									     <!--<a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
 										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
 										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
 									</td>
@@ -199,58 +233,66 @@
 							
 						</table>-->
 						
-					</div> <!-- End #tab1 -->
+					<!--</div>--> <!-- End #tab1 -->
 					
-					<div class="tab-content" id="tab2">
+					<div class="tab-content default-tab" id="tab2">
+                        <div id = "errors">
+                            <?php foreach ($errors as $key=>$value) { ?>
+                                <li> 
+                                    <?php echo $errors[$key]['msg']."<br><br>";
+                            }?> 
+                                </li>
+                        </div>
 					
-						<form action="#" method="post">
+						<form action="addProduct.php" method="POST">
 							
 							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+                                
+                                <p>
+									<label>Product Name</label>
+									<input class="text-input small-input" type="text" id="small-input" name="name" required/> <!--<span class="input-notification error png_bg">Error message</span>-->
+								</p>
+                                
+                                <p>
+									<label>Product Price</label>
+										<input class="text-input small-input" type="text" id="small-input" name="price" required/> <!--<span class="input-notification success png_bg">Successful message</span>--> <!-- Classes for input-notification: success, error, information, attention -->
+										<br /><!--<small>A small description of the field</small>-->
+								</p>
+                                
+                                <p>
+									<label>Product Image</label>
+										<input class="text-input small-input" type="file" id="small-input" name="image" required/> <!--<span class="input-notification success png_bg">Successful message</span>--> <!-- Classes for input-notification: success, error, information, attention -->
+										<br /><!--<small>A small description of the field</small>-->
+                                </p>
+                                
+                                <p>
+                                    <label>Category</label>              
+                                    <select name="category" class="small-input" required>
+                                        <option value="1">Men</option>
+                                        <option value="2">Women</option>
+                                        <option value="3">Kids</option>
+                                        <option value="4">Electronics</option>
+                                        <option value="5">Sports</option>
+                                    </select> 
+                                </p>
+
+                                <p>
+                                    <label>Tags</label>
+                                    <input type="checkbox" name="fashion" /> Fashion 
+                                    <input type="checkbox" name="ecommerce" /> Ecommerce
+                                    <input type="checkbox" name="shop" /> Shop
+                                    <input type="checkbox" name="handbag" /> Hand Bag
+                                    <input type="checkbox" name="laptop" /> Laptop
+                                    <input type="checkbox" name="headphone" /> Headphone
+                                </p>
 								
 								<p>
-									<label>Small form input</label>
-										<input class="text-input small-input" type="text" id="small-input" name="small-input" /> <span class="input-notification success png_bg">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
-										<br /><small>A small description of the field</small>
+									<label>Description</label>
+									<textarea class="text-input textarea wysiwyg" id="textarea" name="description" cols="79" rows="15"></textarea>
 								</p>
 								
 								<p>
-									<label>Medium form input</label>
-									<input class="text-input medium-input datepicker" type="text" id="medium-input" name="medium-input" /> <span class="input-notification error png_bg">Error message</span>
-								</p>
-								
-								<p>
-									<label>Large form input</label>
-									<input class="text-input large-input" type="text" id="large-input" name="large-input" />
-								</p>
-								
-								<p>
-									<label>Checkboxes</label>
-									<input type="checkbox" name="checkbox1" /> This is a checkbox <input type="checkbox" name="checkbox2" /> And this is another checkbox
-								</p>
-								
-								<p>
-									<label>Radio buttons</label>
-									<input type="radio" name="radio1" /> This is a radio button<br />
-									<input type="radio" name="radio2" /> This is another radio button
-								</p>
-								
-								<p>
-									<label>This is a drop down list</label>              
-									<select name="dropdown" class="small-input">
-										<option value="option1">Option 1</option>
-										<option value="option2">Option 2</option>
-										<option value="option3">Option 3</option>
-										<option value="option4">Option 4</option>
-									</select> 
-								</p>
-								
-								<p>
-									<label>Textarea with WYSIWYG</label>
-									<textarea class="text-input textarea wysiwyg" id="textarea" name="textfield" cols="79" rows="15"></textarea>
-								</p>
-								
-								<p>
-									<input class="button" type="submit" value="Submit" />
+									<input class="button" type="submit" name="submit" value="Submit" />
 								</p>
 								
 							</fieldset>
