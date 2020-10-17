@@ -2,7 +2,7 @@
 
     <?php $filename = basename($_SERVER['REQUEST_URI']);
             //echo $filename;
-            $productmenu = array('addProduct.php','manageProduct.php','manageCategories.php','manageTags.php');
+            $productmenu = array('addProduct.php','manageProduct.php','manageCategories.php','manageTags.php','manageColors.php');
             $usermenu = array('addUser.php','manageUser.php');
     ?>
 			
@@ -35,6 +35,7 @@
                 <li><a <?php if($filename == 'manageProduct.php'):?> class="current" <?php endif; ?> href="manageProduct.php">Manage Product</a></li> <!-- Add class "current" to sub menu items also -->
                 <li><a <?php if($filename == 'manageCategories.php'):?> class="current" <?php endif; ?> href="manageCategories.php">Manage Categories</a></li>
                 <li><a <?php if($filename == 'manageTags.php'):?> class="current" <?php endif; ?> href="manageTags.php">Manage Tags</a></li>
+                <li><a <?php if($filename == 'manageColors.php'):?> class="current" <?php endif; ?> href="manageColors.php">Manage Colors</a></li>    
             </ul>
         </li>
         

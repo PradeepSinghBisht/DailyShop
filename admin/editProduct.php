@@ -6,12 +6,12 @@ include "header.php"; ?>
 <?php include "config.php"; ?>
       
         <?php
-            $errors = array();    
+			$errors = array(); 
             
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
                 $sql2 = "SELECT * FROM products WHERE `product_id`='".$id."'";
-                $result = $conn->query($sql2);
+				$result = $conn->query($sql2);
 
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
@@ -22,7 +22,8 @@ include "header.php"; ?>
                                     'description'=>$row['short_desc'],
                                     'price'=>$row['price']);
                     }
-                }
+				}
+				
             }
 
 
@@ -30,7 +31,7 @@ include "header.php"; ?>
                 $name = $_POST['name'];
                 $price = $_POST['price'];
                 $image = $_POST['image'];
-                $category = $_POST['category'];
+				$category = $_POST['category'];
                 $description = $_POST['description'];
 
                 $sql = "SELECT * FROM products WHERE `name`='".$name."'";
@@ -92,180 +93,15 @@ include "header.php"; ?>
 				
 				<div class="content-box-content">
 					
-					<!--<div class="tab-content " id="tab1">--><!-- This is the target div. id must match the href of this div's tab -->
-						
-						<!--<div class="notification attention png_bg">
-							<a href="#" class="close"><img src="resources/images/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
-							<div>
-								This is a Content Box. You can put whatever you want in it. By the way, you can close this notification with the top-right cross.
-							</div>
-						</div>-->
-						
-						<!--<table>
-							
-							<thead>
-								<tr>
-								   <th><input class="check-all" type="checkbox" /></th>
-								   <th>Column 1</th>
-								   <th>Column 2</th>
-								   <th>Column 3</th>
-								   <th>Column 4</th>
-								   <th>Column 5</th>
-								</tr>
-								
-							</thead>
-						 
-							<tfoot>
-								<tr>
-									<td colspan="6">
-										<div class="bulk-actions align-left">
-											<select name="dropdown">
-												<option value="option1">Choose an action...</option>
-												<option value="option2">Edit</option>
-												<option value="option3">Delete</option>
-											</select>
-											<a class="button" href="#">Apply to selected</a>
-										</div>
-										
-										<div class="pagination">
-											<a href="#" title="First Page">&laquo; First</a><a href="#" title="Previous Page">&laquo; Previous</a>
-											<a href="#" class="number" title="1">1</a>
-											<a href="#" class="number" title="2">2</a>
-											<a href="#" class="number current" title="3">3</a>
-											<a href="#" class="number" title="4">4</a>
-											<a href="#" title="Next Page">Next &raquo;</a><a href="#" title="Last Page">Last &raquo;</a>
-										</div>--> <!-- End .pagination -->
-									    <!--<div class="clear"></div>
-									</td>
-								</tr>
-							</tfoot>
-						 
-							<tbody>
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>-->
-										<!-- Icons -->
-									     <!--<a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>-->
-										<!-- Icons -->
-										 <!--<a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>-->
-										<!-- Icons -->
-									     <!--<a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>-->
-										<!-- Icons -->
-									     <!--<a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>-->
-										<!-- Icons -->
-									     <!--<a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>-->
-										<!-- Icons -->
-									     <!--<a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>-->
-										<!-- Icons -->
-									     <!--<a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>-->
-										<!-- Icons -->
-									     <!--<a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-							</tbody>
-							
-						</table>-->
-						
-					<!--</div>--> <!-- End #tab1 -->
-					
 					<div class="tab-content default-tab" id="tab2">
-                        <div id = "errors">
-                            <?php foreach ($errors as $key=>$value) { ?>
-                                <li> 
-                                    <?php echo $errors[$key]['msg']."<br><br>";
-                            }?> 
-                                </li>
-                        </div>
+						<?php foreach ($errors as $key=>$value) { ?>
+							<div class="notification attention png_bg">
+								<a href="#" class="close"><img src="resources/images/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
+								<div>
+									<?php echo $errors[$key]['msg'];
+							echo '</div>';
+						echo '</div>';
+						}?>
 					
 						<form action="editProduct.php" method="POST">
 							
@@ -310,7 +146,7 @@ include "header.php"; ?>
                                     <input type="checkbox" name="laptop" /> Laptop
                                     <input type="checkbox" name="headphone" /> Headphone
                                 </p>
-								
+
 								<p>
 									<label>Description</label>
 									<textarea class="text-input textarea wysiwyg" id="textarea" name="description" cols="79" rows="15"></textarea>

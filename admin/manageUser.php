@@ -101,8 +101,8 @@
                                                     <td>'.$row['address'].'</td>
                                                     <td>
                                                         <!-- Icons -->
-                                                        <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-                                                        <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
+                                                        <a href="editUser.php?id='.$row['user_id'].'" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
+                                                        <a href="deleteUser.php?id='.$row['user_id'].'" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
                                                     </td>
                                                 </tr>';
                                 }

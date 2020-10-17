@@ -22,11 +22,11 @@
 				
 				<div class="content-box-header">
 					
-					<h3>Manage Product</h3>
+					<h3>Manage Tags</h3>
 					
 					<ul class="content-box-tabs">
 						<li><a href="#tab1" class="default-tab">Manage</a></li> <!-- href must be unique and match the id of target div -->
-						<!--<li><a href="#tab2">Add</a></li>-->
+						<li><a href="#tab2">Add</a></li>
 					</ul>
 					
 					<div class="clear"></div>
@@ -42,10 +42,10 @@
 							<div>
 								This is a Content Box. You can put whatever you want in it. By the way, you can close this notification with the top-right cross.
 							</div>
-						</div>-->
-
+                        </div>-->
+                        
                         <?php
-                            $sql2 = "SELECT * FROM products";
+                            $sql2 = "SELECT * FROM colors";
                             $result2 = $conn->query($sql2);
                                     
                             if ($result2->num_rows > 0) {
@@ -54,12 +54,8 @@
 			                					<tr>
                                                     <th><input class="check-all" type="checkbox" /></th>
                                                     <th>Product Id</th>
-													<th>Category Id</th>
-													<th>Tag Id</th>
-                                                    <th>Product Name</th>
-                                                    <th>Product Image</th>
-                                                    <th>Description</th>
-                                                    <th>Price</th>
+													<th>Color</th>
+													<th>Quantity</th>
                                                     <th>Action</th>
 								                </tr>
                                             </thead>
@@ -94,16 +90,11 @@
                                     $html2 .= '<tr>
                                                     <td><input type="checkbox" /></td>
                                                     <td>'.$row['product_id'].'</td>
-													<td>'.$row['category_id'].'</td>
-													<td>'.$row['tag_id'].'</td>
-                                                    <td>'.$row['name'].'</td>
-                                                    <td><img src="images/'.$row['image'].'"></td>
-                                                    <td>'.$row['short_desc'].'</td> 
-                                                    <td>$'.$row['price'].'</td>
+													<td>'.$row['color'].'</td>
+													<td>'.$row['quantity'].'</td>
                                                     <td>
                                                         <!-- Icons -->
-                                                        <a href="editProduct.php?id='.$row['product_id'].'" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-                                                        <a href="deleteProduct.php?id='.$row['product_id'].'" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
+                                                        <a href="deleteColor.php?id='.$row['product_id'].'" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
                                                     </td>
                                                 </tr>';
                                 }
@@ -113,8 +104,8 @@
                         ?> 
 						
 					</div> <!-- End #tab1 -->
-					      
 					
+										
 				</div> <!-- End .content-box-content -->
 				
 			</div> <!-- End .content-box -->
