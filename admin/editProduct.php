@@ -18,7 +18,7 @@ include "header.php"; ?>
                         $_SESSION['productdata'] = array('product_id'=>$row['product_id'],
                                     'category_id'=>$row['category_id'],
                                     'name'=>$row['name'],
-                                    'image'=>$row['image'],
+									'image'=>$row['image'],
                                     'description'=>$row['short_desc'],
                                     'price'=>$row['price']);
                     }
@@ -32,6 +32,10 @@ include "header.php"; ?>
                 $price = $_POST['price'];
                 $image = $_POST['image'];
 				$category = $_POST['category'];
+				$tag = $_POST['tag'];
+				$tags = implode(',', $tag);
+				$color = $_POST['color'];
+				$colors = implode(',', $color);
                 $description = $_POST['description'];
 
                 $sql = "SELECT * FROM products WHERE `name`='".$name."'";
@@ -46,12 +50,12 @@ include "header.php"; ?>
                 }
 
                 if (sizeof($errors) == 0) {
-                    $sql = "UPDATE products SET `category_id` = '".$category."', `name` = '".$name."',
+                    $sql = "UPDATE products SET `category_id` = '".$category."', `tag_id` = '".$tags."',`color_id` = '".$colors."', `name` = '".$name."',
                             `image` = '".$image."', `price` = '".$price."', `short_desc` = '".$description."' 
                             WHERE `product_id`='".$_SESSION['productdata']['product_id']."'";
                     
                     if ($conn->query($sql) === true) {
-                        echo "<script> alert('Updated successfully') </script>";
+						echo "<script> alert('Updated successfully') </script>";
                     } else {
                         $errors[] = array('input'=>'form', 'msg'=>$conn->error);
                         echo "Error: " . $sql . "<br>" . $conn->error;
@@ -129,27 +133,51 @@ include "header.php"; ?>
                                 <p>
                                     <label>Category</label>              
                                     <select name="category" class="small-input" required>
-                                        <option value="1">Men</option>
-                                        <option value="2">Women</option>
-                                        <option value="3">Kids</option>
-                                        <option value="4">Electronics</option>
-                                        <option value="5">Sports</option>
-                                    </select> 
+										<?php
+											$sql3 = 'SELECT * FROM categories';
+											$result3 = $conn->query($sql3);
+
+											if ($result3->num_rows > 0) {
+												while ($row = $result3->fetch_assoc()) {
+													echo '<option value="'.$row['category_id'].'">'.$row['name'].'</option>';
+												}
+											}
+										?>
+                                    </select>
                                 </p>
 
                                 <p>
-                                    <label>Tags</label>
-                                    <input type="checkbox" name="fashion" /> Fashion 
-                                    <input type="checkbox" name="ecommerce" /> Ecommerce
-                                    <input type="checkbox" name="shop" /> Shop
-                                    <input type="checkbox" name="handbag" /> Hand Bag
-                                    <input type="checkbox" name="laptop" /> Laptop
-                                    <input type="checkbox" name="headphone" /> Headphone
-                                </p>
+									<label>Tags</label>
+									<?php
+										$sql4 = 'SELECT * FROM tags';
+										$result4 = $conn->query($sql4);
+
+										if ($result4->num_rows > 0) {
+											while ($row = $result4->fetch_assoc()) {
+												echo '<input type="checkbox" name="tag[]" value="'.$row['tag_id'].'"/> '.$row['name'].'';
+											}
+										}
+									?>
+								</p>
+
+								<p>
+									<label>Colors</label>
+									<?php
+										$sql6 = 'SELECT * FROM colors';
+										$result6 = $conn->query($sql6);
+
+										if ($result6->num_rows > 0) {
+											while ($row = $result6->fetch_assoc()) {
+												echo '<input type="checkbox" name="color[]" value="'.$row['color_id'].'"/> '.$row['color'].'';
+											}
+										}
+									?>
+								</p>
 
 								<p>
 									<label>Description</label>
-									<textarea class="text-input textarea wysiwyg" id="textarea" name="description" cols="79" rows="15"></textarea>
+									<textarea class="text-input textarea wysiwyg" id="textarea" name="description" cols="79" rows="15"><?php 
+                                        echo $_SESSION['productdata']['description'];?></textarea>
 								</p>
 								
 								<p>

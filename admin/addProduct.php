@@ -9,28 +9,13 @@
                 $price = $_POST['price'];
                 $image = $_POST['image'];
 				$category = $_POST['category'];
-			
-				$tag = array();
-				$i = 0;
 
-				$sql5 = 'SELECT * FROM tags';
-				$result5 = $conn->query($sql5);
+				$tag = $_POST['tag'];
+				$tags = implode(',', $tag);
 
-				if ($result5->num_rows > 0) {
-					while ($row = $result5->fetch_assoc()) {
-						if (isset($_POST[$row['name']])) {
-							$tag[$i] = $_POST[$row['name']];
-							$i++;
-						}
-					}
-				}
+				$color = $_POST['color'];
+				$colors = implode(',', $color);
 
-				print_r($tag);
-
-				$tags = json_encode($tag);
-				print_r($tags);
-
-				//$color = $_POST['color'];
 				//$quantity = $_POST['quantity'];
 
                 $description = $_POST['description'];
@@ -46,8 +31,8 @@
 
                 if (sizeof($errors) == 0) {
 
-                    $sql2 = 'INSERT INTO products(`category_id`,`tag_id`, `name`,`image`,`price`,`short_desc`) 
-                    VALUES("'.$category.'","'.$tags.'","'.$name.'","'.$image.'","'.$price.'","'.$description.'")';
+                    $sql2 = 'INSERT INTO products(`category_id`,`tag_id`, `color_id`, `name`,`image`,`price`,`short_desc`) 
+                    VALUES("'.$category.'","'.$tags.'","'.$colors.'","'.$name.'","'.$image.'","'.$price.'","'.$description.'")';
 					
                     if ($conn->query($sql2) === true) {
                         echo "<script> alert('Added successfully'); </script>";
@@ -148,18 +133,27 @@
 
 										if ($result4->num_rows > 0) {
 											while ($row = $result4->fetch_assoc()) {
-												echo '<input type="checkbox" name="'.$row['name'].'" value="'.$row['tag_id'].'" /> '.$row['name'].'';
+												echo '<input type="checkbox" name="tag[]" value="'.$row['tag_id'].'" /> '.$row['name'].'';
+											}
+										}
+									?>
+								</p>
+
+								<p>
+									<label>Colors</label>
+									<?php
+										$sql6 = 'SELECT * FROM colors';
+										$result6 = $conn->query($sql6);
+
+										if ($result6->num_rows > 0) {
+											while ($row = $result6->fetch_assoc()) {
+												echo '<input type="checkbox" name="color[]" value="'.$row['color_id'].'" /> '.$row['color'].'';
 											}
 										}
 									?>
 								</p>
 								
-								<!--<p>
-									<label>Product Color</label>
-										<input class="text-input small-input" type="text" id="small-input" name="color" required/> 
-										<br />
-								</p>
-
+								<!--
 								<p>
 									<label>Product Quantity</label>
 										<input class="text-input small-input" type="number" id="small-input" name="quantity" required/> 

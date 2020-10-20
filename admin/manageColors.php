@@ -1,6 +1,35 @@
 <?php include "header.php"; ?>
 <?php include "sidebar.php"; ?>
-<?php include "config.php"; ?>
+<?php include "config.php"; 
+	$errors = array();  ?>
+
+		<?php
+            if (isset($_POST['submit'])) {
+				$color = $_POST['color'];
+
+                $sql = "SELECT * FROM colors WHERE `color`='".$color."'";
+				$result = $conn->query($sql);
+
+				if ($result->num_rows > 0) {
+					while ($row = $result->fetch_assoc()) {
+						$errors[] = array('msg'=>'color name already exists');
+					}
+				}
+
+				if (sizeof($errors) == 0) {
+
+					$sql2 = 'INSERT INTO colors(`color`) VALUES("'.$color.'")';
+
+					if ($conn->query($sql2) === true) {
+						echo "<script> alert('Added successfully'); </script>";
+
+					} else {
+						$errors[] = array('msg'=>$conn->error);
+						echo "Error: " . $sql2 . "<br>" . $conn->error;
+					}
+				}
+            }
+        ?>
 		
 		<div id="main-content"> <!-- Main Content Section with everything -->
 			
@@ -53,9 +82,8 @@
                                             <thead>
 			                					<tr>
                                                     <th><input class="check-all" type="checkbox" /></th>
-                                                    <th>Product Id</th>
+													<th>Color Id</th>
 													<th>Color</th>
-													<th>Quantity</th>
                                                     <th>Action</th>
 								                </tr>
                                             </thead>
@@ -88,13 +116,12 @@
                                             <tbody>';
                                 while ($row = $result2->fetch_assoc()) {
                                     $html2 .= '<tr>
-                                                    <td><input type="checkbox" /></td>
-                                                    <td>'.$row['product_id'].'</td>
+													<td><input type="checkbox" /></td>
+                                                    <td>'.$row['color_id'].'</td>
 													<td>'.$row['color'].'</td>
-													<td>'.$row['quantity'].'</td>
                                                     <td>
                                                         <!-- Icons -->
-                                                        <a href="deleteColor.php?id='.$row['product_id'].'" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
+                                                        <a href="deleteColor.php?id='.$row['color_id'].'" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
                                                     </td>
                                                 </tr>';
                                 }
@@ -104,7 +131,37 @@
                         ?> 
 						
 					</div> <!-- End #tab1 -->
+
+					<div class="tab-content" id="tab2">
+						<?php foreach ($errors as $key=>$value) { ?>
+							<div class="notification attention png_bg">
+								<a href="#" class="close"><img src="resources/images/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
+								<div>
+									<?php echo $errors[$key]['msg'];
+							echo '</div>';
+						echo '</div>';
+						}?>
 					
+						<form action="manageColors.php" method="POST">
+							
+							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+                                
+								<p>
+									<label>Color</label>
+									<input class="text-input small-input" type="text" id="small-input" name="color" required/> <!--<span class="input-notification error png_bg">Error message</span>-->
+                                </p>
+                                
+                                <p>
+									<input class="button" type="submit" name="submit" value="Submit" />
+								</p>
+                                
+							</fieldset>
+							
+							<div class="clear"></div><!-- End .clear -->
+							
+						</form>
+						
+					</div>
 										
 				</div> <!-- End .content-box-content -->
 				

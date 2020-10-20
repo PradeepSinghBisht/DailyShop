@@ -56,6 +56,7 @@
                                                     <th>Product Id</th>
 													<th>Category Id</th>
 													<th>Tag Id</th>
+													<th>Color Id</th>
                                                     <th>Product Name</th>
                                                     <th>Product Image</th>
                                                     <th>Description</th>
@@ -96,6 +97,7 @@
                                                     <td>'.$row['product_id'].'</td>
 													<td>'.$row['category_id'].'</td>
 													<td>'.$row['tag_id'].'</td>
+													<td>'.$row['color_id'].'</td>
                                                     <td>'.$row['name'].'</td>
                                                     <td><img src="images/'.$row['image'].'"></td>
                                                     <td>'.$row['short_desc'].'</td> 
