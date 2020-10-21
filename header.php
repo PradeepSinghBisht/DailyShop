@@ -184,7 +184,7 @@
                       </span>
                     </li>
                   </ul>
-                  <a class="aa-cartbox-checkout aa-primary-btn" href="checkout.php">Checkout</a>
+                  <a class="aa-cartbox-checkout aa-primary-btn" href="checkout.php?total=<?php echo $total ?>">Checkout</a>
                 </div>
               </div>
               <!-- / cart box -->
